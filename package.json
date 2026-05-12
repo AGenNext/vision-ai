@@ -1,0 +1,20 @@
+{
+  "name": "@openautonomyx/vision-ai",
+  "version": "1.0.0",
+  "description": "Unified computer vision API for object detection, OCR, face recognition",
+  "main": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --watch src/index.ts",
+    "build": "bun build src/index.ts",
+    "start": "bun run src/index.ts",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "elyoa": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5.0.0"
+  }
+}
