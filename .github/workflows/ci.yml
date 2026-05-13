@@ -1,12 +1,17 @@
-name: CI
+name: CI/CD
 
 on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   test:
+    name: Test and build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,3 +20,11 @@ jobs:
       - run: bun run typecheck
       - run: bun test
       - run: bun run build
+
+  deploy:
+    name: Deployment placeholder
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - run: echo "CI passed. Add deployment provider secrets here to enable production deploys."
