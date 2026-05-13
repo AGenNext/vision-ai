@@ -1,94 +1,35 @@
 # Vision AI
 
-Unified computer vision API for object detection, OCR, face recognition, and image analysis.
+Secure unified computer vision API for object detection, OCR, image classification, and image analysis.
 
-## Features
+This repository now ships two surfaces:
 
-- **Object Detection** - Detect and classify objects in images
-- **OCR (Optical Character Recognition)** - Extract text from images
-- **Face Detection** - Detect and analyze faces
-- **Image Classification** - Categorize images
-- **Scene Understanding** - Analyze image context
+- A hardened Bun/Elysia API at `/api/v1/vision/*`
+- A lightweight marketing site at `/`
 
-## API Endpoint
+## What is included
 
-```
-POST /api/v1/vision/detect
-POST /api/v1/vision/ocr
-POST /api/v1/vision/faces
-POST /api/v1/vision/classify
-```
+- Marketing homepage with product positioning and CTA links
+- API key authentication using `API_KEYS`
+- Security headers
+- CORS allowlisting using `CORS_ORIGINS`
+- In-memory rate limiting
+- Multipart image validation
+- Upload size limits
+- Request IDs in headers and JSON responses
+- Health and readiness checks
+- CI, CodeQL, Dependabot, issue templates, and a security policy
 
-## Quick Start
+## Quick start
 
 ```bash
-# Using OpenAutonomyX CLI
-autonomyx vision detect --image photo.jpg
-
-# Using API
-curl -X POST https://api.openautonomyx.com/api/v1/vision/detect \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -F "image=@photo.jpg"
+bun install
+cp .env.example .env
+bun run dev
 ```
 
-## Response Format
+Open http://localhost:3000 to view the marketing site.
 
-```json
-{
-  "success": true,
-  "results": [
-    {
-      "label": "person",
-      "confidence": 0.98,
-      "bounding_box": {
-        "x": 100,
-        "y": 50,
-        "width": 200,
-        "height": 300
-      }
-    }
-  ]
-}
-```
+## License
 
-## Integration
-
-```javascript
-import { VisionAI } from '@openautonomyx/vision';
-
-const client = new VisionAI({ apiKey: 'YOUR_API_KEY' });
-
-const result = await client.detect({
-  image: './photo.jpg',
-  model: 'yolov8'
-});
-```
-
-## Models
-
-| Model | Use Case | Speed |
-|-------|---------|-------|
-| yolov8 | Object detection | Fast |
-| coco | General objects | Medium |
-|ocr | Text extraction | Medium |
-|face | Face detection | Fast |
-
-## Pricing
-
-| Plan | Requests/month | Price |
-|------|-------------|-------|
-| Free | 1,000 | $0 |
-| Pro | 50,000 | $29 |
-| Business | 500,000 | $199 |
-| Enterprise | Unlimited | Custom |
-
-## Documentation
-
-- [API Reference](docs/api.md)
-- [Models Guide](docs/models.md)
-- [Integration Examples](docs/examples.md)
-
----
-
-**Repository:** [openautonomyx/vision-ai](https://github.com/openautonomyx/vision-ai)
-**License:** MIT
+MIT
