@@ -21,10 +21,18 @@ jobs:
       - run: bun test
       - run: bun run build
 
-  deploy:
-    name: Deployment placeholder
+  deployment-readiness:
+    name: Deployment readiness
     runs-on: ubuntu-latest
     needs: test
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     steps:
-      - run: echo "CI passed. Add deployment provider secrets here to enable production deploys."
+      - uses: actions/checkout@v4
+      - name: Verify deployment documentation exists
+        run: test -f docs/cloudflare-deployment.md
+      - name: Explain deployment status
+        run: |
+          echo "CI passed."
+          echo "Deployment is intentionally not automatic yet."
+          echo "See docs/cloudflare-deployment.md for required Cloudflare permissions, secrets, and runtime choices."
+          echo "The current Bun/Elysia server should be deployed to a Bun-compatible runtime or adapted before Cloudflare Workers deployment."
